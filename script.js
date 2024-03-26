@@ -8,6 +8,16 @@
 
 //let ComputerChoice
 
+let winOrLose;
+let winOrLoseOrDrawMessage;
+let playerSelection = "scissors";
+const ComputerSelection = getComputerChoice();
+let scoreCounterPlayer = 0;
+let scoreCounterComputer = 0;
+let scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ scoreCounterComputer;
+
+
+
 function getComputerChoice(){
     let RandomNumber = (Math.floor(Math.random() * (4 - 1) + 1))
     //console.log(RandomNumber)
@@ -21,6 +31,34 @@ function getComputerChoice(){
     return ComputerChoice
    
    
+}
+
+const buttonRock = document.querySelector("#rock");
+const buttonPaper = document.querySelector("#paper");
+const buttonScissors = document.querySelector("#scissors");
+const divScoreMessage = document.querySelector("#scoreMessage");
+
+//divScoreMessage.append(scoreMessage)
+
+buttonRock.addEventListener("click",() => {
+   playerSelection = "rock"; game ();
+
+});
+
+buttonPaper.addEventListener("click",() => {
+  playerSelection = "paper"; game ();
+
+});
+
+buttonScissors.addEventListener("click",() => {
+  playerSelection = "scissors"; game ();
+
+});
+
+function playerSelectionFn (){
+  if (playerSelection == "rock")  {return "rock"}
+    else if (playerSelection == "paper") {return "paper"}
+    else return "scissors"
 }
 
 //ComputerChoice = getComputerChoice()
@@ -41,9 +79,10 @@ function getComputerChoice(){
 
 function playRound(playerSelection, ComputerSelection) {
     //let winOrLoseOrDrawMessage;
-    playerSelection = prompt("Choose: Rock, Paper or Scissors")
-    playerSelection = playerSelection.toLowerCase()
-    ComputerSelection = getComputerChoice()
+    //playerSelection = "rock";
+    //playerSelection = playerSelection.toLowerCase()
+    ComputerSelection = getComputerChoice();
+    playerSelection = playerSelectionFn ();
    
     
     if (playerSelection === ComputerSelection) {winOrLoseOrDrawMessage = "Draw! You both choose " + ComputerSelection ;
@@ -79,10 +118,26 @@ function playRound(playerSelection, ComputerSelection) {
     return winOrLoseOrDrawMessage
 
   }
-let winOrLose
-let winOrLoseOrDrawMessage
-let playerSelection = "scissors";
-const ComputerSelection = getComputerChoice();
+
+function newGame() {
+  if (scoreCounterPlayer > scoreCounterComputer) {
+    divScoreMessage.textContent = ("");
+    divScoreMessage.append("Congratulations, you won the game of five");
+    scoreCounterComputer = 0; 
+    scoreCounterPlayer = 0;
+  }
+  else {
+    divScoreMessage.textContent = ("");
+    divScoreMessage.append("You loose the game of five, try again");
+    scoreCounterComputer = 0; 
+    scoreCounterPlayer = 0;
+  }
+
+  }
+  
+
+
+
 //console.log(playRound(playerSelection, ComputerSelection));
 
 //Create Best of five game:
@@ -103,18 +158,44 @@ const ComputerSelection = getComputerChoice();
 
 function game (playerSelection, ComputerSelection) {
 
-let scoreCounterPlayer = 0
-let scoreCounterComputer = 0
-let scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ scoreCounterComputer
+//let scoreCounterPlayer = 0
+//let scoreCounterComputer = 0
+//let scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ scoreCounterComputer
 //let winOrLoseOrDrawMessage
 //let winOrLose
 
 
-console.log(scoreCounterPlayer)
-console.log(scoreCounterComputer)
+//console.log(scoreCounterPlayer)
+//console.log(scoreCounterComputer)
 console.log(scoreMessage)
 
-if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage)}
+/*if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage)}
+
+else if (scoreCounterPlayer === 3) {scoreMessage = "Congratulations you win the best of five"; console.log(scoreMessage)}*/
+
+/*else*/ {playRound(playerSelection, ComputerSelection)}
+
+winOrLose = winOrLoseOrDrawMessage.slice(4,5)
+
+//console.log(winOrLose)
+
+if (winOrLose === "W") {scoreCounterPlayer = scoreCounterPlayer+1}
+else {scoreCounterComputer = scoreCounterComputer +1}
+scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ scoreCounterComputer;
+if (scoreCounterComputer == 5 || scoreCounterPlayer == 5) {
+  newGame()
+}
+else {
+divScoreMessage.textContent = ("");
+divScoreMessage.append(scoreMessage);
+
+
+//console.log(scoreCounterPlayer)
+//console.log(scoreCounterComputer)
+console.log(scoreMessage)
+}
+
+/*if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage)}
 
 else if (scoreCounterPlayer === 3) {scoreMessage = "Congratulations you win the best of five"; console.log(scoreMessage)}
 
@@ -131,23 +212,6 @@ scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ score
 console.log(scoreCounterPlayer)
 console.log(scoreCounterComputer)
 console.log(scoreMessage)
-if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage)}
-
-else if (scoreCounterPlayer === 3) {scoreMessage = "Congratulations you win the best of five"; console.log(scoreMessage)}
-
-else {playRound(playerSelection, ComputerSelection)}
-
-winOrLose = winOrLoseOrDrawMessage.slice(4,5)
-
-//console.log(winOrLose)
-
-if (winOrLose === "W") {scoreCounterPlayer = scoreCounterPlayer+1}
-else {scoreCounterComputer = scoreCounterComputer +1}
-scoreMessage = "Score Player: "+ scoreCounterPlayer+ ": Score Computer: "+ scoreCounterComputer
-
-console.log(scoreCounterPlayer)
-console.log(scoreCounterComputer)
-console.log(scoreMessage)
 
 if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage);return}
 
@@ -205,10 +269,16 @@ console.log(scoreMessage)
 
 if (scoreCounterComputer === 3) {scoreMessage = "Computer wins the best of five"; console.log(scoreMessage)}
 
-else if (scoreCounterPlayer === 3) {scoreMessage = "Congratulations you win the best of five"; console.log(scoreMessage)}
+else if (scoreCounterPlayer === 3) {scoreMessage = "Congratulations you win the best of five"; console.log(scoreMessage)}*/
 
 
 
 }
 
-game (playerSelection, ComputerSelection)
+//game (playerSelection, ComputerSelection)
+
+
+
+
+
+
